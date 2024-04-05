@@ -29,28 +29,30 @@
 
 #include <cmocka.h>
 
-#include "./import/blake2-impl.h"
-#include "./import/blake2b.h"
+// #include "./import/blake2-impl.h"
+// #include "./import/blake2b.h"
+#include "./import/blake3_impl.h"
+#include "./import/blake3.h"
 #include "personal_message.h"
 
 /* Start hacks */
-void os_longjmp(unsigned int exception) {}
+// void os_longjmp(unsigned int exception) {}
 
-struct cx_xblake_s {
-    cx_blake2b_t blake2b;
-    uint64_t     m[16];
-    uint64_t     v[16];
-    uint8_t      buffer[BLAKE2B_OUTBYTES];
-    uint8_t      block1[BLAKE2B_BLOCKBYTES];
-} ;
-typedef struct cx_xblake_s cx_xblake_t;
+// struct cx_xblake_s {
+//     cx_blake2b_t blake2b;
+//     uint64_t     m[16];
+//     uint64_t     v[16];
+//     uint8_t      buffer[BLAKE2B_OUTBYTES];
+//     uint8_t      block1[BLAKE2B_BLOCKBYTES];
+// } ;
+// typedef struct cx_xblake_s cx_xblake_t;
 
-union cx_u {
-  cx_xblake_t blake;
-};
-union cx_u G_cx;
+// union cx_u {
+//   cx_xblake_t blake;
+// };
+// union cx_u G_cx;
 
-uint8_t* input_public_key;
+// uint8_t* input_public_key;
 
 /* End hacks */
 

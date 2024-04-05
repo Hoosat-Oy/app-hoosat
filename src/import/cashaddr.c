@@ -83,7 +83,7 @@ static int convert_bits(uint8_t *out,
 }
 
 void create_checksum(uint8_t *payload, size_t payload_length, uint8_t *checksum) {
-    uint8_t *prefix = (uint8_t *) "kaspa";
+    uint8_t *prefix = (uint8_t *) "hoosat";
     uint64_t mod = PolyMod(prefix, payload, payload_length);
 
     for (size_t i = 0; i < 8; ++i) {
@@ -124,7 +124,7 @@ int cashaddr_encode(uint8_t *hash,
     memmove(tmp + 1, hash, hash_length);
     convert_bits(payload, &payload_length, 5, tmp, hash_length + 1, 8, 1);
 
-    create_checksum(payload, payload_length, checksum);  // Assume prefix is 'kaspa'
+    create_checksum(payload, payload_length, checksum);  // Assume prefix is 'hoosat'
 
     for (i = 0; i < payload_length; ++i) {
         if (*payload >> 5) {

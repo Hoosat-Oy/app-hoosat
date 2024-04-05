@@ -79,7 +79,7 @@ bool address_from_pubkey(const uint8_t public_key[static 64],
         return false;
     }
 
-    char hrp[] = "kaspa";
+    char hrp[] = "hoosat";
 
     // Choose the bigger length for public key container
     uint8_t compressed_public_key[33] = {0};
@@ -97,11 +97,11 @@ bool address_from_pubkey(const uint8_t public_key[static 64],
         return false;
     }
 
-    // First part of the address is "kaspa:"
+    // First part of the address is "hoosat:"
     memmove(address, hrp, sizeof(hrp));
-    address[5] = ':';
+    address[6] = ':';
 
-    cashaddr_encode(compressed_public_key, compressed_pub_size, address + 6, address_len, version);
+    cashaddr_encode(compressed_public_key, compressed_pub_size, address + 7, address_len, version);
 
     memmove(out, address, address_len);
 

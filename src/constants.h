@@ -61,12 +61,19 @@
 #define MAX_INPUT_SCRIPT_PUBLIC_KEY_LEN 35
 
 /**
- * The signing key used for sighash
+ * The signing keys used for sighash
  */
-#define SIGNING_KEY "TransactionSigningHash"
+#define TRANSACTION_SIGNING_HASH        "TransactionSigningHash"
+#define TRANSACTION_HASH                "TransactionHash"
+#define TRANSACTION_ID                  "TransactionID"
+#define TRANSACTION_SIGNING_HASH_ECDSA  "TransactionSigningHashECDSA"
+#define BLOCK_HASH                      "BlockHash"
+#define PROOF_OF_WORK_HASH              "ProofOfWorkHash"
+#define HEAVY_HASH                      "HeavyHash"
+#define MERKLE_BRANCH_HASH              "MerkleBranchHash"
 
-#define MESSAGE_SIGNING_KEY "PersonalMessageSigningHash"
+#define MESSAGE_SIGNING_KEY             "PersonalMessageSigningHash"
 
-#define MAX_OUTPUT_COUNT             2
-#define SCRIPT_PUBLIC_KEY_BUFFER_LEN 40
-#define KASPA_MAX_BIP32_PATH_LEN     5
+#define MAX_OUTPUT_COUNT                2
+#define SCRIPT_PUBLIC_KEY_BUFFER_LEN    40
+#define KASPA_MAX_BIP32_PATH_LEN        5

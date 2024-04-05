@@ -29,7 +29,7 @@
 
 #include "constants.h"
 
-#define SCHNORR_ADDRESS_LEN 67
+#define SCHNORR_ADDRESS_LEN 68
 #define ECDSA_ADDRESS_LEN   69
 
 typedef enum {

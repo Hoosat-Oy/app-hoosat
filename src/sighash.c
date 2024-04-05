@@ -25,8 +25,10 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "./import/blake2-impl.h"
-#include "./import/blake2b.h"
+// #include "./import/blake2-impl.h"
+// #include "./import/blake2b.h"
+#include "./import/blake3_impl.h"
+#include "./import/blake3.h"
 
 #include "./transaction/types.h"
 #include "buffer.h"
@@ -34,7 +36,7 @@
 #include "globals.h"
 #include "./constants.h"
 
-static bool hash_init(blake2b_state* hash, size_t size, uint8_t* key, size_t key_len) {
+static bool hash_init(blake3_hasher* hash, size_t size, uint8_t* key, size_t key_len) {
     if (key == NULL && key_len != 0) {
         goto err;
     }
@@ -42,36 +44,40 @@ static bool hash_init(blake2b_state* hash, size_t size, uint8_t* key, size_t key
     if (size % 8 != 0 || size < 8 || size > 512) {
         goto err;
     }
-    memset(hash, 0, sizeof(blake2b_state));
+    memset(hash, 0, sizeof(blake3_hasher));
 
     size = size / 8;
 
-    if (blake2b_init_key(hash, size, key, key_len) < 0) {
-        goto err;
-    }
+    // Fixed padding the key
+    uint8_t fixed_size_key[32];
+    memset(fixed_size_key, 0, sizeof(fixed_size_key));
+    memcpy(fixed_size_key, key, key_len);
+
+    blake3_hasher_init_keyed(hash, fixed_size_key);
     return true;
 
 err:
     return false;
 }
 
-static bool hash_update(blake2b_state* hash, uint8_t* data, size_t len) {
-    // blake2b_update currently always returns 0
-    return blake2b_update(hash, data, len) == 0;
+static bool hash_update(blake3_hasher* hash, uint8_t* data, size_t len) {
+    blake3_hasher_update(hash, data, len);
+    return true;
 }
 
-static bool hash_finalize(blake2b_state* hash, uint8_t* out, size_t out_len) {
+static bool hash_finalize(blake3_hasher* hash, uint8_t* out, size_t out_len) {
     if (out_len < 32) {
         return false;
     }
-    // blake2b_final returns 0 for success and -1 for any error
-    return blake2b_final(hash, out, 32) == 0;
+
+    blake3_hasher_finalize(hash, out, 32);
+    return true;
 }
 
 static bool calc_prev_outputs_hash(transaction_t* tx, uint8_t* out_hash, size_t out_len) {
-    blake2b_state inner_hash_writer;
+    blake3_hasher inner_hash_writer;
     uint8_t inner_buffer[32] = {0};
-    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) SIGNING_KEY, 22)) {
+    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 32)) {
         return false;
     }
 
@@ -90,9 +96,9 @@ static bool calc_prev_outputs_hash(transaction_t* tx, uint8_t* out_hash, size_t 
 }
 
 static bool calc_sequences_hash(transaction_t* tx, uint8_t* out_hash, size_t out_len) {
-    blake2b_state inner_hash_writer;
+    blake3_hasher inner_hash_writer;
     uint8_t inner_buffer[32] = {0};
-    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) SIGNING_KEY, 22)) {
+    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 32)) {
         return false;
     }
 
@@ -109,9 +115,9 @@ static bool calc_sequences_hash(transaction_t* tx, uint8_t* out_hash, size_t out
 }
 
 static bool calc_sig_op_count_hash(transaction_t* tx, uint8_t* out_hash, size_t out_len) {
-    blake2b_state inner_hash_writer;
+    blake3_hasher inner_hash_writer;
     uint8_t inner_buffer[32] = {0};
-    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) SIGNING_KEY, 22)) {
+    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 32)) {
         return false;
     }
 
@@ -127,9 +133,9 @@ static bool calc_sig_op_count_hash(transaction_t* tx, uint8_t* out_hash, size_t 
 }
 
 static bool calc_outputs_hash(transaction_t* tx, uint8_t* out_hash, size_t out_len) {
-    blake2b_state inner_hash_writer;
+    blake3_hasher inner_hash_writer;
     uint8_t inner_buffer[32] = {0};
-    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) SIGNING_KEY, 22)) {
+    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 32)) {
         return false;
     }
 
@@ -195,11 +201,11 @@ bool calc_sighash(transaction_t* tx,
         return false;
     }
     uint8_t outer_buffer[36] = {0};
-    blake2b_state sighash;
+    blake3_hasher sighash;
 
     memset(outer_buffer, 0, sizeof(outer_buffer));
 
-    if (!hash_init(&sighash, 256, (uint8_t*) SIGNING_KEY, 22)) {
+    if (!hash_init(&sighash, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 32)) {
         return false;
     }
 

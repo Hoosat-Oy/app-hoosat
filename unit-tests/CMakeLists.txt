@@ -33,7 +33,7 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
   message(FATAL_ERROR "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there. You may need to remove CMakeCache.txt. ")
 endif()
 
-add_compile_definitions(TEST HAVE_HASH HAVE_BLAKE2 HAVE_ECC USB_SEGMENT_SIZE=64 MAX_INPUT_COUNT=15 MAX_MESSAGE_LEN=200 IO_SEPROXYHAL_BUFFER_SIZE_B=128)
+add_compile_definitions(TEST HAVE_HASH HAVE_BLAKE3 BLAKE3_NO_SSE2 BLAKE3_NO_SSE41 BLAKE3_NO_AVX2 BLAKE3_NO_AVX512 HAVE_ECC USB_SEGMENT_SIZE=64 MAX_INPUT_COUNT=15 MAX_MESSAGE_LEN=200 IO_SEPROXYHAL_BUFFER_SIZE_B=128)
 
 include_directories(../src)
 # include_directories(mock_includes)
@@ -53,7 +53,12 @@ add_executable(test_tx_parser test_tx_parser.c)
 add_executable(test_tx_utils test_tx_utils.c)
 
 add_library(address SHARED ../src/address.c)
-add_library(blake2b SHARED ../src/import/blake2b.c)
+# add_library(blake2b SHARED ../src/import/blake2b.c)
+add_library(blake3 SHARED
+  ../src/import/blake3.c
+  ../src/import/blake3_dispatch.c
+  ../src/import/blake3_portable.c
+)
 add_library(cashaddr SHARED ../src/import/cashaddr.c)
 add_library(bip32 SHARED /opt/ledger-secure-sdk/lib_standard_app/bip32.c)
 add_library(buffer SHARED /opt/ledger-secure-sdk/lib_standard_app/buffer.c)
@@ -70,8 +75,10 @@ add_library(varint SHARED /opt/ledger-secure-sdk/lib_standard_app/varint.c)
 
 target_link_libraries(test_address PUBLIC cmocka gcov address cashaddr)
 target_link_libraries(test_format PUBLIC cmocka gcov format_local)
-target_link_libraries(test_sighash PUBLIC cmocka gcov sighash blake2b write)
-target_link_libraries(test_personal_message PUBLIC cmocka gcov personal_message blake2b write)
+# target_link_libraries(test_sighash PUBLIC cmocka gcov sighash blake2b write)
+target_link_libraries(test_sighash PUBLIC cmocka gcov sighash blake3 write)
+#target_link_libraries(test_personal_message PUBLIC cmocka gcov personal_message blake2b write)
+target_link_libraries(test_personal_message PUBLIC cmocka gcov personal_message blake3 write)
 target_link_libraries(test_apdu_parser PUBLIC cmocka gcov apdu_parser)
 target_link_libraries(test_tx_parser PUBLIC
                       transaction_deserialize
