@@ -63,7 +63,7 @@ static void test_script_public_key_to_address(void **state) {
         0xac
     };
 
-    uint8_t schnorr_address[68] = {0};
+    uint8_t schnorr_address[SCHNORR_ADDRESS_LEN+1] = {0};
 
     script_public_key_to_address(schnorr_address, sizeof(schnorr_address), schnorr_spk, sizeof(schnorr_spk));
 
@@ -72,18 +72,22 @@ static void test_script_public_key_to_address(void **state) {
 
     uint8_t p2sh_spk[35] = {
         OP_BLAKE2B, 0x20,
-        0x2e, 0x15, 0xf8, 0xf9, 0x30, 0xd9, 0x8a, 0x12, 0x08, 0xde, 0xa3, 0xc7, 0x0c, 0x47, 0x85, 0x26,
-        0x9b, 0xbf, 0x9f, 0x8d, 0x50, 0x66, 0x28, 0x24, 0x63, 0x12, 0xcd, 0x38, 0x77, 0x13, 0x66, 0x2a,
+        // 0x2e, 0x15, 0xf8, 0xf9, 0x30, 0xd9, 0x8a, 0x12, 0x08, 0xde, 0xa3, 0xc7, 0x0c, 0x47, 0x85, 0x26,
+        // 0x9b, 0xbf, 0x9f, 0x8d, 0x50, 0x66, 0x28, 0x24, 0x63, 0x12, 0xcd, 0x38, 0x77, 0x13, 0x66, 0x2a,
+        0xef, 0x96, 0xc7, 0xd6, 0x46, 0x75, 0x51, 0x6b, 0xa8,
+        0xb0, 0x0e, 0xaf, 0xf8, 0xd8, 0xcd, 0x55, 0x1e, 0x21, 
+        0xa9, 0x8b, 0xcf, 0x9b, 0xae, 0x17, 0xf2, 0x88, 0xa9, 
+        0xe7, 0x3e, 0x32, 0xac, 0xc1,
         OP_EQUAL
     };
 
-    uint8_t p2sh_address[68] = {0};
+    uint8_t p2sh_address[SCHNORR_ADDRESS_LEN+1] = {0};
 
     script_public_key_to_address(p2sh_address, sizeof(p2sh_address), p2sh_spk, sizeof(p2sh_spk));
 
     // assert_string_equal((char *) p2sh_address, "kaspa:precqv0krj3r6uyyfa36ga7s0u9jct0v4wg8ctsfde2gkrsgwgw8jgxfzfc98");
     //assert_string_equal((char *) schnorr_address, "hoosat:qrhed37kge64z6agkq82l7xce423ugdf308ehtsh72y2nee7x2kvzxv6xqwd4");
-    assert_string_equal((char *) p2sh_address, "hoosat:precqv0krj3r6uyyfa36ga7s0u9jct0v4wg8ctsfde2gkrsgwgw8jgxfzfc98");
+    assert_string_equal((char *) p2sh_address, "hoosat:prhed37kge64z6agkq82l7xce423ugdf308ehtsh72y2nee7x2kvz035jc64y");
 
     uint8_t ecdsa_even_spk[35] = {
         0x21, 0x02,
@@ -97,8 +101,8 @@ static void test_script_public_key_to_address(void **state) {
     uint8_t ecdsa_even_address[70] = {0};
 
     script_public_key_to_address(ecdsa_even_address, sizeof(ecdsa_even_address), ecdsa_even_spk, sizeof(ecdsa_even_spk));
-
-    assert_string_equal((char *) ecdsa_even_address, "kaspa:qypdtlw845g6vhgtheug9lpahjgmtpsarqkueeul0sd7t07npfnhe4s7fd82n0v");
+    // assert_string_equal((char *) ecdsa_even_address, "kaspa:qypdtlw845g6vhgtheug9lpahjgmtpsarqkueeul0sd7t07npfnhe4s7fd82n0v");
+    assert_string_equal((char *) ecdsa_even_address, "hoosat:qypdtlw845g6vhgtheug9lpahjgmtpsarqkueeul0sd7t07npfnhe4s73hcw7f");
 
     uint8_t ecdsa_odd_spk[35] = {
         0x21, 0x03,
@@ -112,8 +116,8 @@ static void test_script_public_key_to_address(void **state) {
     uint8_t ecdsa_odd_address[70] = {0};
 
     script_public_key_to_address(ecdsa_odd_address, sizeof(ecdsa_odd_address), ecdsa_odd_spk, sizeof(ecdsa_odd_spk));
-
-    assert_string_equal((char *) ecdsa_odd_address, "kaspa:qyp7xyqdshh6aylqct7x2je0pse4snep8glallgz8jppyaajz7y7qeq4x79fq4z");
+    // assert_string_equal((char *) ecdsa_odd_address, "kaspa:qyp7xyqdshh6aylqct7x2je0pse4snep8glallgz8jppyaajz7y7qeq4x79fq4z");
+    assert_string_equal((char *) ecdsa_odd_address, "hoosat:qyp7xyqdshh6aylqct7x2je0pse4snep8glallgz8jppyaajz7y7qeq47y6ddn");
 }
 
 static void test_calc_fees(void **state) {
