@@ -80,7 +80,7 @@ static void test_p2sh_address_from_public_key(void **state) {
 
     address_from_pubkey(public_key, P2SH, address, SCHNORR_ADDRESS_LEN);
 
-    assert_string_equal((char *) address, "kaspa:precqv0krj3r6uyyfa36ga7s0u9jct0v4wg8ctsfde2gkrsgwgw8jgxfzfc98");
+    assert_string_equal((char *) address, "hoosat:pzwtcm46qdcnhed5ypzjjefrccfytgyamdf55nsvmavwlq57ntgc5me53xu0v");
 }
 
 static void test_ecdsa_address_from_public_key(void **state) {
@@ -120,7 +120,7 @@ static void test_ecdsa_address_from_public_key(void **state) {
 
     address_from_pubkey(public_key_odd, ECDSA, address_odd, ECDSA_ADDRESS_LEN);
 
-    assert_string_equal((char *) address_odd, "kaspa:qyp7xyqdshh6aylqct7x2je0pse4snep8glallgz8jppyaajz7y7qeq4x79fq4z");
+    assert_string_equal((char *) address_odd, "hoosat:qypq826a8p9dzwfe2gmn3ampfdnq27qn7wdgthgjl9k6lxewulsswcs2nnptxk");
 }
 
 static void test_invalid_type(void **state) {

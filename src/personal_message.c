@@ -33,11 +33,11 @@
 
 static bool hash_init(blake3_hasher* hash, size_t size, uint8_t* key, size_t key_len) {
     if (key == NULL && key_len != 0) {
-        goto err;
+        return false;
     }
 
     if (size % 8 != 0 || size < 8 || size > 512) {
-        goto err;
+        return false;
     }
     memset(hash, 0, sizeof(blake3_hasher));
 
@@ -50,22 +50,18 @@ static bool hash_init(blake3_hasher* hash, size_t size, uint8_t* key, size_t key
 
     blake3_hasher_init_keyed(hash, fixed_size_key);
     return true;
-
-err:
-    return false;
 }
 
 static bool hash_update(blake3_hasher* hash, uint8_t* data, size_t len) {
     blake3_hasher_update(hash, data, len);
-    return 0;
+    return true;
 }
 
 static bool hash_finalize(blake3_hasher* hash, uint8_t* out, size_t out_len) {
-    if (out_len < 32) {
+    if(out_len < 32) {
         return false;
-    }
-
-    blake3_hasher_finalize(hash, out, 32);
+    } 
+    blake3_hasher_finalize(hash, out, out_len);
     return true;
 }
 
@@ -73,10 +69,9 @@ bool hash_personal_message(uint8_t* message_bytes,
                            size_t message_byte_len,
                            uint8_t* out_hash,
                            size_t out_len) {
-    if (out_len < 32) {
+    if(out_len < 32) {
         return false;
-    }
-
+    } 
     blake3_hasher inner_hash_writer;
     if (!hash_init(&inner_hash_writer, 256, (uint8_t*) MESSAGE_SIGNING_KEY, 32)) {
         return false;
