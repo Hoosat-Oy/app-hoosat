@@ -25,7 +25,7 @@
                 "USB_SEGMENT_SIZE=64",
                 "UNUSED(x)=(void)x",
                 "APPVERSION=\"1.0.0\"",
-                "APPNAME=\"Kaspa\"",
+                "APPNAME=\"Hoosat\"",
                 "MAJOR_VERSION=0",
                 "MINOR_VERSION=0",
                 "PATCH_VERSION=1",

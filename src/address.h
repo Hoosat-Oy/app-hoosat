@@ -45,7 +45,7 @@ size_t compress_public_key(const uint8_t public_key[static 64],
 /**
  * Convert public key to address.
  *
- * address = Bech32(public_key)[0:31] (67 bytes) => "kaspa:" + 61 bytes
+ * address = Bech32(public_key)[0:31] (67 bytes) => "hoosat:" + 61 bytes
  *
  * @param[in]  public_key
  *   Pointer to byte buffer with public key.

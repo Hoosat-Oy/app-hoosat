@@ -118,7 +118,7 @@ function load_to_device() {
             --tlv \
             --targetId 0x33000004 \
             --fileName bin/app.hex \
-            --appName Kaspa \
+            --appName Hoosat \
             --appVersion 1.0.0 \
             --icon "0100000000ffffff000778001830e21c7807fc017e801ff007de8173048c01e0010e" \
             --apiLevel 1 \
@@ -131,7 +131,7 @@ function load_to_device() {
             --tlv \
             --targetId 0x33100004 \
             --fileName bin/app.hex \
-            --appName Kaspa \
+            --appName Hoosat \
             --appVersion 1.0.0 \
             --dataSize $DATA_SIZE \
             --icon "0100000000ffffff000778001830e21c7807fc017e801ff007de8173048c01e0010e" \
@@ -146,7 +146,7 @@ function load_to_device() {
             --tlv \
             --targetId 0x31100004 \
             --fileName bin/app.hex \
-            --appName Kaspa \
+            --appName Hoosat \
             --appVersion 1.0.0 \
             --dataSize $DATA_SIZE \
             --icon "0100000000ffffff000000f00ffc3ffc398e710e711e703e703e701e700e718e71fc39fc3ff00f0000" \
