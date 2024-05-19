@@ -2,6 +2,7 @@
 /*****************************************************************************
  * MIT License
  *
+ * Copyright (c) 2024 Hoosat Oy
  * Copyright (c) 2023 coderofstuff
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy

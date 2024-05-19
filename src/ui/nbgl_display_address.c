@@ -1,6 +1,7 @@
 /*****************************************************************************
  * MIT License
  *
+ * Copyright (c) 2024 Hoosat Oy
  * Copyright (c) 2023 coderofstuff
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -101,7 +102,7 @@ int ui_display_address() {
     }
     snprintf(g_address, sizeof(g_address), "%.*s", sizeof(address), address);
 
-    nbgl_useCaseReviewStart(&C_stax_app_kaspa_64px,
+    nbgl_useCaseReviewStart(&C_htn_64,
                             "Verify KAS address",
                             NULL,
                             "Cancel",

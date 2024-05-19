@@ -1,6 +1,7 @@
 /*****************************************************************************
  * MIT License
  *
+ * Copyright (c) 2024 Hoosat Oy
  * Copyright (c) 2023 coderofstuff
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -95,7 +96,7 @@ static void review_continue(void) {
     pairList.pairs = pairs;
 
     // Info long press
-    infoLongPress.icon = &C_stax_app_kaspa_64px;
+    infoLongPress.icon = &C_htn_64;
     infoLongPress.text = "Sign transaction\nto send KAS";
     infoLongPress.longPressText = "Hold to sign";
 
@@ -148,7 +149,7 @@ int ui_display_transaction() {
     snprintf(g_address, sizeof(g_address), "%.*s", ECDSA_ADDRESS_LEN, address);
 
     // Start review
-    nbgl_useCaseReviewStart(&C_stax_app_kaspa_64px,
+    nbgl_useCaseReviewStart(&C_htn_64,
                             "Review transaction\nto send KAS",
                             NULL,
                             "Reject transaction",

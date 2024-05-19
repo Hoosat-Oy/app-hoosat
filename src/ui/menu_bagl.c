@@ -1,6 +1,7 @@
 /*****************************************************************************
  * MIT License
  *
+ * Copyright (c) 2024 Hoosat Oy
  * Copyright (c) 2023 coderofstuff
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,7 +31,7 @@
 #include "../globals.h"
 #include "menu.h"
 
-UX_STEP_NOCB(ux_menu_ready_step, pnn, {&C_kaspa_logo, APPNAME, "is ready"});
+UX_STEP_NOCB(ux_menu_ready_step, pnn, {&C_htn_16, APPNAME, "is ready"});
 UX_STEP_NOCB(ux_menu_version_step, bn, {"Version", APPVERSION});
 UX_STEP_CB(ux_menu_about_step, pb, ui_menu_about(), {&C_icon_certificate, "About"});
 UX_STEP_VALID(ux_menu_exit_step, pb, os_sched_exit(-1), {&C_icon_dashboard_x, "Quit"});
@@ -55,7 +56,7 @@ void ui_menu_main() {
     ux_flow_init(0, ux_menu_main_flow, NULL);
 }
 
-UX_STEP_NOCB(ux_menu_info_step, bn, {"Hoosat App", "(c) 2023 coderofstuff"});
+UX_STEP_NOCB(ux_menu_info_step, bn, {"Hoosat App", "(c) 2024 Hoosat Oy"});
 UX_STEP_CB(ux_menu_back_step, pb, ui_menu_main(), {&C_icon_back, "Back"});
 
 // FLOW for the about submenu:

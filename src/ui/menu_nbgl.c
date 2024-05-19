@@ -1,6 +1,7 @@
 /*****************************************************************************
  * MIT License
  *
+ * Copyright (c) 2024 Hoosat Oy
  * Copyright (c) 2023 coderofstuff
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,13 +37,13 @@ void app_quit(void) {
 }
 
 void ui_menu_main(void) {
-    nbgl_useCaseHome(APPNAME, &C_stax_app_kaspa_64px, NULL, false, ui_menu_about, app_quit);
+    nbgl_useCaseHome(APPNAME, &C_htn_64, NULL, false, ui_menu_about, app_quit);
 }
 
 // 'About' menu
 
 static const char* const INFO_TYPES[] = {"Version", "Developer"};
-static const char* const INFO_CONTENTS[] = {APPVERSION, "coderofstuff"};
+static const char* const INFO_CONTENTS[] = {APPVERSION, "Hoosat Oy"};
 
 static bool nav_callback(uint8_t page, nbgl_pageContent_t* content) {
     UNUSED(page);
