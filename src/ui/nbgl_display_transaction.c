@@ -96,7 +96,7 @@ static void review_continue(void) {
     pairList.pairs = pairs;
 
     // Info long press
-    infoLongPress.icon = &C_htn_64;
+    infoLongPress.icon = &C_htn_16;
     infoLongPress.text = "Sign transaction\nto send KAS";
     infoLongPress.longPressText = "Hold to sign";
 
@@ -149,7 +149,7 @@ int ui_display_transaction() {
     snprintf(g_address, sizeof(g_address), "%.*s", ECDSA_ADDRESS_LEN, address);
 
     // Start review
-    nbgl_useCaseReviewStart(&C_htn_64,
+    nbgl_useCaseReviewStart(&C_htn_16,
                             "Review transaction\nto send KAS",
                             NULL,
                             "Reject transaction",

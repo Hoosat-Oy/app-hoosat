@@ -94,7 +94,7 @@ static void continue_message_review(void) {
     pairList.pairs = pairs;
 
     // Info long press
-    infoLongPress.icon = &C_htn_64;
+    infoLongPress.icon = &C_htn_16;
     infoLongPress.text = "Sign message?";
     infoLongPress.longPressText = "Hold to sign";
 
@@ -121,7 +121,7 @@ int ui_display_message() {
                            (char *) G_context.msg_info.message,
                            G_context.msg_info.message_len);
 
-    nbgl_useCaseReviewStart(&C_htn_64,
+    nbgl_useCaseReviewStart(&C_htn_16,
                             "Review Message",
                             NULL,
                             "Reject message",

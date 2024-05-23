@@ -37,7 +37,7 @@ void app_quit(void) {
 }
 
 void ui_menu_main(void) {
-    nbgl_useCaseHome(APPNAME, &C_htn_64, NULL, false, ui_menu_about, app_quit);
+    nbgl_useCaseHome(APPNAME, &C_htn_16, NULL, false, ui_menu_about, app_quit);
 }
 
 // 'About' menu
@@ -50,6 +50,7 @@ static bool nav_callback(uint8_t page, nbgl_pageContent_t* content) {
     content->type = INFOS_LIST;
     content->infosList.nbInfos = 2;
     content->infosList.infoTypes = (const char**) INFO_TYPES;
+    
     content->infosList.infoContents = (const char**) INFO_CONTENTS;
     return true;
 }
