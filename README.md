@@ -1,57 +1,37 @@
-# Kaspa Ledger Integration
+# Hoosat Ledger Integration
 
-This is the code for the Kaspa embedded app.
+Source code for the Hoosat embedded app.
+
+# How to Load App onto Ledger Device
 
 ## Prerequisite
 
-### With the docker image builder
+### Install Docker, VSCode and Ledger Tools Extension
 
-The app-builder docker image [from this repository](https://github.com/LedgerHQ/ledger-app-builder) contains all needed tools and library to build and load an application.
-You can download it from the ghcr.io docker repository:
+- Install VSCode from [https://code.visualstudio.com/](https://code.visualstudio.com/)
 
-```shell
-docker pull ghcr.io/ledgerhq/ledger-app-builder/ledger-app-builder-full
-```
+- Install Ledger Dev Tools extension from [https://marketplace.visualstudio.com/items?itemName=LedgerHQ.ledger-dev-tools](https://marketplace.visualstudio.com/items?itemName=LedgerHQ.ledger-dev-tools)
 
-You can then enter this development environment by executing the following command from the directory of the application `git` repository:
+- Install Docker Desktop from [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
 
-```shell
-cd app-kaspa
-docker run --rm -it -v "$(realpath .):/app" ghcr.io/ledgerhq/ledger-app-builder/ledger-app-builder-full
-```
 
-The application's code will be available from inside the docker container, you can proceed to the following compilation steps to build your app.
+## Build Source Code
 
-## Compilation and load
+- Open Docker Desktop and make sure that it is running.
+- Open the repository folder with VSCode.
+- Open the Ledger Dev Tools extension from VSCode sidemenu.
+  - Click on 'Docker Container > Update container' to update the Docker container. Wait for it to update.
+  - Click on 'Build > Build' to build the source code.
+ 
+## Load onto Device
 
-```shell
-make DEBUG=1  # compile optionally with PRINTF
-make load     # load the app on the Nano using ledgerblue
-```
+- Connect ledger device to computer via USB.
+- Make sure device is unlocked and at the home screen.
+- In VSCode, click 'Device Operations > Load app on device' to load it onto your ledger.
+- Click accept to the prompts asking if you would like to install.
 
-## Documentation
+## Using Ledger App
 
-High level documentation such as [APDU](doc/APDU.md), [commands](doc/COMMANDS.md) and [transaction serialization](doc/TRANSACTION.md) are included in developer documentation which can be generated with [doxygen](https://www.doxygen.nl)
-
-```shell
-doxygen .doxygen/Doxyfile
-```
-
-the process outputs HTML and LaTeX documentations in `doc/html` and `doc/latex` folders.
-
-## Tests & Continuous Integration
-
-The flow processed in [GitHub Actions](https://github.com/features/actions) is the following:
-
-- Code formatting with [clang-format](http://clang.llvm.org/docs/ClangFormat.html)
-- Compilation of the application for Ledger Nano S in [ledger-app-builder](https://github.com/LedgerHQ/ledger-app-builder)
-- Unit tests of C functions with [cmocka](https://cmocka.org/) (see [unit-tests/](unit-tests/))
-- End-to-end tests with [Speculos](https://github.com/LedgerHQ/speculos) emulator (see [tests/](tests/))
-- Code coverage with [gcov](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html)/[lcov](http://ltp.sourceforge.net/coverage/lcov.php) and upload to [codecov.io](https://about.codecov.io)
-- Documentation generation with [doxygen](https://www.doxygen.nl)
-
-It outputs 3 artifacts:
-
-- `speculos-log` within APDU command/response when executing end-to-end tests
-- `code-coverage` within HTML details of code coverage
-- `documentation` within HTML auto-generated documentation
+- Open the app in your ledger device.
+- Interact with a front end like the Hoosat Vault.
+- When prompted to sign, the front end will communicate with the ledger to sign. Verify and sign on your ledger.
