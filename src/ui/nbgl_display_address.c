@@ -103,7 +103,7 @@ int ui_display_address() {
     snprintf(g_address, sizeof(g_address), "%.*s", sizeof(address), address);
 
     nbgl_useCaseReviewStart(&C_htn_64,
-                            "Verify KAS address",
+                            "Verify HTN address",
                             NULL,
                             "Cancel",
                             continue_review,

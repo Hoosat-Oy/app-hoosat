@@ -74,7 +74,7 @@ bool hash_personal_message(uint8_t* message_bytes,
         return false;
     } 
     blake3_hasher inner_hash_writer;
-    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) MESSAGE_SIGNING_KEY, 32)) {
+    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) MESSAGE_SIGNING_KEY, 26)) {
         return false;
     }
 

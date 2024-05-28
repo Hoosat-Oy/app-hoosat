@@ -97,7 +97,7 @@ static void review_continue(void) {
 
     // Info long press
     infoLongPress.icon = &C_htn_64;
-    infoLongPress.text = "Sign transaction\nto send KAS";
+    infoLongPress.text = "Sign transaction\nto send HTN";
     infoLongPress.longPressText = "Hold to sign";
 
     nbgl_useCaseStaticReview(&pairList, &infoLongPress, "Reject transaction", review_choice);
@@ -122,7 +122,7 @@ int ui_display_transaction() {
                               EXPONENT_SMALLEST_UNIT)) {
         return io_send_sw(SW_DISPLAY_AMOUNT_FAIL);
     }
-    snprintf(g_amount, sizeof(g_amount), "KAS %.*s", sizeof(amount), amount);
+    snprintf(g_amount, sizeof(g_amount), "HTN %.*s", sizeof(amount), amount);
 
     memset(g_fees, 0, sizeof(g_fees));
     char fees[30] = {0};
@@ -135,7 +135,7 @@ int ui_display_transaction() {
                               EXPONENT_SMALLEST_UNIT)) {
         return io_send_sw(SW_DISPLAY_AMOUNT_FAIL);
     }
-    snprintf(g_fees, sizeof(g_fees), "KAS %.*s", sizeof(fees), fees);
+    snprintf(g_fees, sizeof(g_fees), "HTN %.*s", sizeof(fees), fees);
 
     memset(g_address, 0, sizeof(g_address));
 
@@ -150,7 +150,7 @@ int ui_display_transaction() {
 
     // Start review
     nbgl_useCaseReviewStart(&C_htn_64,
-                            "Review transaction\nto send KAS",
+                            "Review transaction\nto send HTN",
                             NULL,
                             "Reject transaction",
                             review_continue,

@@ -78,7 +78,7 @@ static bool hash_finalize(blake3_hasher* hash, uint8_t* out, size_t out_len) {
 static bool calc_prev_outputs_hash(transaction_t* tx, uint8_t* out_hash, size_t out_len) {
     blake3_hasher inner_hash_writer;
     uint8_t inner_buffer[32] = {0};
-    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 32)) {
+    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 22)) {
         return false;
     }
 
@@ -99,7 +99,7 @@ static bool calc_prev_outputs_hash(transaction_t* tx, uint8_t* out_hash, size_t 
 static bool calc_sequences_hash(transaction_t* tx, uint8_t* out_hash, size_t out_len) {
     blake3_hasher inner_hash_writer;
     uint8_t inner_buffer[32] = {0};
-    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 32)) {
+    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 22)) {
         return false;
     }
 
@@ -118,7 +118,7 @@ static bool calc_sequences_hash(transaction_t* tx, uint8_t* out_hash, size_t out
 static bool calc_sig_op_count_hash(transaction_t* tx, uint8_t* out_hash, size_t out_len) {
     blake3_hasher inner_hash_writer;
     uint8_t inner_buffer[32] = {0};
-    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 32)) {
+    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 22)) {
         return false;
     }
 
@@ -136,7 +136,7 @@ static bool calc_sig_op_count_hash(transaction_t* tx, uint8_t* out_hash, size_t 
 static bool calc_outputs_hash(transaction_t* tx, uint8_t* out_hash, size_t out_len) {
     blake3_hasher inner_hash_writer;
     uint8_t inner_buffer[32] = {0};
-    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 32)) {
+    if (!hash_init(&inner_hash_writer, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 22)) {
         return false;
     }
 
@@ -206,7 +206,7 @@ bool calc_sighash(transaction_t* tx,
 
     memset(outer_buffer, 0, sizeof(outer_buffer));
 
-    if (!hash_init(&sighash, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 32)) {
+    if (!hash_init(&sighash, 256, (uint8_t*) TRANSACTION_SIGNING_HASH, 22)) {
         return false;
     }
 
