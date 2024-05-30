@@ -1,11 +1,13 @@
 from io import BytesIO
 from typing import Union
-from hashlib import blake2b
+from blake3 import blake3
 
 from .kaspa_utils import read, read_uint
 
-def hash_init() -> blake2b:
-    return blake2b(digest_size=32, key=bytes("TransactionSigningHash", "ascii"))
+def hash_init() -> blake3:
+    key = bytes("TransactionSigningHash", "ascii")
+    padded_key = key.ljust(32, b'\x00')  # Pad the key to 32 bytes with zeros
+    return blake3(key=padded_key)
 
 class TransactionError(Exception):
     pass
