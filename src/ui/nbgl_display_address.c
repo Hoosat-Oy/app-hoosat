@@ -102,7 +102,7 @@ int ui_display_address() {
     }
     snprintf(g_address, sizeof(g_address), "%.*s", sizeof(address), address);
 
-    nbgl_useCaseReviewStart(&C_htn_16,
+    nbgl_useCaseReviewStart(&C_hoosat_logo,
                             "Verify HTN address",
                             NULL,
                             "Cancel",

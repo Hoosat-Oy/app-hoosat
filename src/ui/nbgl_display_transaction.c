@@ -96,7 +96,7 @@ static void review_continue(void) {
     pairList.pairs = pairs;
 
     // Info long press
-    infoLongPress.icon = &C_htn_16;
+    infoLongPress.icon = &C_hoosat_logo;
     infoLongPress.text = "Sign transaction\nto send HTN";
     infoLongPress.longPressText = "Hold to sign";
 
@@ -149,7 +149,7 @@ int ui_display_transaction() {
     snprintf(g_address, sizeof(g_address), "%.*s", ECDSA_ADDRESS_LEN, address);
 
     // Start review
-    nbgl_useCaseReviewStart(&C_htn_16,
+    nbgl_useCaseReviewStart(&C_hoosat_logo,
                             "Review transaction\nto send HTN",
                             NULL,
                             "Reject transaction",

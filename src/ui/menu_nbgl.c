@@ -37,7 +37,7 @@ void app_quit(void) {
 }
 
 void ui_menu_main(void) {
-    nbgl_useCaseHome(APPNAME, &C_htn_16, NULL, false, ui_menu_about, app_quit);
+    nbgl_useCaseHome(APPNAME, &C_hoosat_logo, NULL, false, ui_menu_about, app_quit);
 }
 
 // 'About' menu
