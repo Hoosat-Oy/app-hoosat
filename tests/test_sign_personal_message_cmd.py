@@ -22,7 +22,7 @@ def test_sign_message_simple(firmware, backend, navigator, test_name):
 
     address_type = 1
     address_index = 5
-    message = "Hello Kaspa!"
+    message = "Hello Hoosat!"
 
     message_data = PersonalMessage(message, address_type, address_index)
 
@@ -65,7 +65,7 @@ def test_sign_message_simple_different_account(firmware, backend, navigator, tes
     address_type = 1
     address_index = 5
     account = 0x80000001 # This is account 1'
-    message = "Hello Kaspa!"
+    message = "Hello Hoosat!"
 
     message_data = PersonalMessage(message, address_type, address_index, account)
 
@@ -158,7 +158,7 @@ def test_sign_message_refused(firmware, backend, navigator, test_name):
 
     address_type = 1
     address_index = 6
-    message = "Hello Kaspa!"
+    message = "Hello Hoosat!"
 
     message_data = PersonalMessage(message, address_type, address_index)
 

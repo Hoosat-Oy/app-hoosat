@@ -25,8 +25,8 @@ def test_sign_tx_simple(firmware, backend, navigator, test_name):
         version=0,
         inputs=[
             TransactionInput(
-                value=1100000,
-                tx_id="40b022362f1a303518e2b49f86f87a317c87b514ca0f3d08ad2e7cf49d08cc70",
+                value=111034931097452,
+                tx_id="433959685611ba27a77377edab622cc9e85b157d97bb2d31449a4cc7f98160cd",
                 address_type=0,
                 address_index=0,
                 index=0,
@@ -35,8 +35,8 @@ def test_sign_tx_simple(firmware, backend, navigator, test_name):
         ],
         outputs=[
             TransactionOutput(
-                value=1090000,
-                script_public_key="2011a7215f668e921013eb7aac9b7e64b9ec6e757c1b648e89388c919f676aa88cac"
+                value=99997931,
+                script_public_key="20f0132cdc31c28b08bba419c34a36d0f11e50f407fa731a4109f9a06ecbe39711ac"
             )
         ]
     )

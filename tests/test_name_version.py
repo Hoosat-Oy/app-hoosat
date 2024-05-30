@@ -11,5 +11,5 @@ def test_get_app_and_version(backend, backend_name):
     # Use an helper to parse the response, assert the values
     app_name, version = unpack_get_app_and_version_response(response.data)
 
-    assert app_name == "Kaspa"
+    assert app_name == "Hoosat"
     assert version == "1.0.2"
