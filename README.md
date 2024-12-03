@@ -54,6 +54,19 @@ Source code for the Hoosat embedded app
 
 ## Using Ledger App
   
-- Open the app in your ledger device.
-- Interact with a front end like the [Hoosat Vault](https://vault.hoosat.fi).
-- When prompted to sign, the front end will communicate with the ledger to sign. Verify and sign on your ledger.
+- Open the app in your ledger device. 
+- Interact with a front end vault: [Hoosat Vault](https://vault.hoosat.fi).
+
+## Cannot access usb
+Sometimes there are permissions issues with USB, but ledger has udev rules available. 
+
+```
+curl -LO https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/20-hw1.rules
+sudo mv 20-hw1.rules /etc/udev/rules.d/
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
+
+Then try again connecting Vault to the Ledger. 
+
+
